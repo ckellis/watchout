@@ -9,8 +9,6 @@
                 .style('background-color', 'red')
                 .style('background-position', 'center');
 
-  var enemies = 15;
-
   var drag = d3.behavior.drag()
              .on('dragstart', function() { circle.style('fill', 'red'); })
              .on('drag', function() { circle.attr('cx', d3.event.x)
@@ -28,30 +26,35 @@
                 .call(drag)
                 .style('fill', 'yellow');
 
-  for(var i = 0; i < enemies; i++){
-    d3.select('svg').append('circle')
+  var numEnemies = 15;
+
+  var enemies = _.range(0, numEnemies).map(function(item) {
+    return {
+      id: item,
+      x: Math.random() * ((width-10) - 10) + 10,
+      y: Math.random() * ((height-10) - 10) + 10
+    }
+  });
+
+    d3.select('svg').selectAll('.enemy')
+                .data(enemies, function(d){return d.id;})
+                .enter().append('circle')
                 .attr('class', 'enemy')
-                .attr('width', 20)
-                .attr('height', 20)
-                .attr('cx', Math.random() * ((width-10) - 10) + 10)
-                .attr('cy', Math.random() * ((height-10) - 10) + 10)
+                .attr('cx', function(d){return d.x;})
+                .attr('cy', function(d){return d.y;})
                 .attr('r', 10)
                 .style('fill', 'black');
-  }
 
-  (function moveEnemies(){
+(function moveEnemies(){
     d3.select('svg').selectAll('.enemy')
+                .data(enemies, function(d){return d.id;})
                 .transition()
                 .duration(500)
-                .each('end', function() {
-                  d3.select(this)
-                  .transition()
-                  .duration(500)
-                  .attr('cx', Math.random() * ((width-10) - 10) + 10)
-                  .attr('cy', Math.random() * ((height-10) - 10) + 10);
-                });
+                .attr('cx', function(d) { return Math.random() * ((width-10) - 10) + 10; })
+                .attr('cy', function(d) { return Math.random() * ((height-10) - 10) + 10; });
     setTimeout(moveEnemies, 1000);
-  })();
+})();
+
 
   var testCollision = function(){
 
