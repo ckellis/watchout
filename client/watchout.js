@@ -10,10 +10,8 @@
                 .style('background-position', 'center');
 
   var drag = d3.behavior.drag()
-             .on('dragstart', function() { circle.style('fill', 'red'); })
-             .on('drag', function() { circle.attr('cx', d3.event.x)
-                                            .attr('cy', d3.event.y); })
-             .on('dragend', function() { circle.style('fill', 'black'); });
+             .on('drag', function() { player.attr('cx', d3.event.x)
+                                            .attr('cy', d3.event.y); });
 
   var player = d3.select('svg').selectAll('.draggable')
                 .data([{ x: width/2, y: height/2, r: 10 }])
