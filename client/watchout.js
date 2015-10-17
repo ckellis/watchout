@@ -7,7 +7,7 @@
     score: 0,
     bestScore: 0,
     collisions: 0
-  }
+  };
 
   var gameBoard = d3.select('.board').append('svg')
                 .attr('width', width)
@@ -26,7 +26,7 @@
 
   var updateCollisions = function() {
     d3.select('.collisions').text('Collisions: ' + gameStats.collisions.toString());
-  }
+  };
 
   var drag = d3.behavior.drag()
              .on('drag', function() {
@@ -63,31 +63,31 @@
     }
   });
 
-    d3.select('svg').selectAll('.enemy')
-                .data(enemies, function(d){return d.id;})
-                .enter().append('circle')
-                .attr('class', 'enemy')
-                .attr('cx', function(d){return d.x;})
-                .attr('cy', function(d){return d.y;})
-                .attr('r', 10)
-                .style('fill', 'black');
+  d3.select('svg').selectAll('.enemy')
+              .data(enemies, function(d){return d.id;})
+              .enter().append('circle')
+              .attr('class', 'enemy')
+              .attr('cx', function(d){return d.x;})
+              .attr('cy', function(d){return d.y;})
+              .attr('r', 10)
+              .style('fill', 'black');
 
-(function moveEnemies() {
-    d3.select('svg').selectAll('.enemy')
-                .data(enemies, function(d){return d.id;})
-                .transition()
-                .duration(500)
-                .attr('cx', function(d) {
-                  d.x = Math.random() * ((width-10) - 10) + 10
-                  return d.x;
-                })
-                .attr('cy', function(d) {
-                  d.y = Math.random() * ((height-10) - 10) + 10;
-                  return d.y;
-                });
-    // testCollision();
-    setTimeout(moveEnemies, 1000);
-})();
+  (function moveEnemies() {
+      d3.select('svg').selectAll('.enemy')
+                  .data(enemies, function(d){return d.id;})
+                  .transition()
+                  .duration(500)
+                  .attr('cx', function(d) {
+                    d.x = Math.random() * ((width-10) - 10) + 10
+                    return d.x;
+                  })
+                  .attr('cy', function(d) {
+                    d.y = Math.random() * ((height-10) - 10) + 10;
+                    return d.y;
+                  });
+      // testCollision();
+      setTimeout(moveEnemies, 1000);
+  })();
 
   (function increaseScore() {
     gameStats.score++;
@@ -103,7 +103,7 @@
 
       var separation = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
 
-      if (separation < radiusSum) {
+      if (gameStats.score > 10 && separation < radiusSum) {
         gameStats.collisions++;
         updateCollisions();
         updateBestScore();
@@ -111,7 +111,7 @@
         updateScore();
       }
     }
-    setTimeout(testCollision, 50);
+    setTimeout(testCollision, 1);
   })();
 
 
