@@ -1,7 +1,7 @@
 // start slingin' some d3 here.
 (function(){
   var width = 600;
-  var height = 400;
+  var height = 450;
 
   var gameStats = {
     score: 0,
@@ -16,16 +16,16 @@
                 .style('background-position', 'center');
 
   var updateScore = function() {
-    d3.select('.current').text('Current score: ' + gameStats.score.toString());
+    d3.select('.current').text(gameStats.score.toString());
   };
 
   var updateBestScore = function() {
     gameStats.bestScore = Math.max(gameStats.bestScore, gameStats.score);
-    d3.select('.highscore').text('High score: ' + gameStats.bestScore.toString());
+    d3.select('.highscore').text(gameStats.bestScore.toString());
   };
 
   var updateCollisions = function() {
-    d3.select('.collisions').text('Collisions: ' + gameStats.collisions.toString());
+    d3.select('.collisions').text(gameStats.collisions.toString());
   };
 
   var drag = d3.behavior.drag()
