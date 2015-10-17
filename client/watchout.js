@@ -85,7 +85,6 @@
                     d.y = Math.random() * ((height-10) - 10) + 10;
                     return d.y;
                   });
-      // testCollision();
       setTimeout(moveEnemies, 1000);
   })();
 
@@ -95,11 +94,13 @@
     setTimeout(increaseScore, 50);
   })();
 
-  (function testCollision() {
-    for (var i = 0; i < enemies.length; i++) {
-      var radiusSum = parseFloat(enemies[i].r) + parseFloat(playerProperties.r);
-      var xDiff = parseFloat(enemies[i].x) - parseFloat(playerProperties.x);
-      var yDiff = parseFloat(enemies[i].y) - parseFloat(playerProperties.y);
+  var testCollision = function() {
+    d3.selectAll('.enemy').each(function(d, i) {
+      var enemy = d3.select(this);
+
+      var radiusSum = parseFloat(enemy.attr('r')) + parseFloat(playerProperties.r);
+      var xDiff = parseFloat(enemy.attr('cx')) - parseFloat(playerProperties.x);
+      var yDiff = parseFloat(enemy.attr('cy')) - parseFloat(playerProperties.y);
 
       var separation = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
 
@@ -110,10 +111,9 @@
         gameStats.score = 0;
         updateScore();
       }
-    }
-    setTimeout(testCollision, 1);
-  })();
-
+    }); 
+  };
+  setInterval(testCollision, 1);
 
 })();
 
