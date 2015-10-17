@@ -63,6 +63,11 @@
     }
   });
 
+  var pattern = d3.select('svg').append("pattern")
+                   .attr({ id:"hash4_4", width:"8", height:"8", patternUnits:"userSpaceOnUse"})
+                   .append("rect")
+                   .attr({ width:"4", height:"8"});
+
   d3.select('svg').selectAll('.enemy')
               .data(enemies, function(d){return d.id;})
               .enter().append('circle')
@@ -70,7 +75,7 @@
               .attr('cx', function(d){return d.x;})
               .attr('cy', function(d){return d.y;})
               .attr('r', 10)
-              .style('fill', 'black');
+              .style('fill', 'url(#hash4_4)');
 
   (function moveEnemies() {
       d3.select('svg').selectAll('.enemy')
