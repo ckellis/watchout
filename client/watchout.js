@@ -12,7 +12,7 @@
   var gameBoard = d3.select('.board').append('svg')
                 .attr('width', width)
                 .attr('height', height)
-                .style('background-color', 'red')
+                .style('background-color', 'white')
                 .style('background-position', 'center');
 
   var updateScore = function() {
@@ -51,7 +51,7 @@
                 .attr('cy', function(d) { return d.y; })
                 .attr('r', function(d) { return d.r; })
                 .call(drag)
-                .style('fill', 'yellow');
+                .style('fill', 'orange');
   var numEnemies = 15;
 
   var enemies = _.range(0, numEnemies).map(function(item) {
@@ -109,7 +109,7 @@
 
       var separation = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
 
-      if (gameStats.score > 10 && separation < radiusSum) {
+      if (gameStats.score > 15 && separation < radiusSum) {
         gameStats.collisions++;
         updateCollisions();
         updateBestScore();

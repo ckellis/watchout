@@ -3,6 +3,10 @@
 /* Note: an asteroid image is included in this repo.
 Feel free to use it if you like. */
 
+body{
+  background: url('http://api.ning.com/files/lnNHCVxKyAJCb-5d8ScpgPIsA-dAEMoIWV9SjUH5KU2hPz58hGA3TBctfJ4YWu2ilnd3NcHofSivmx05U6-1IEn2jYE-l51M/polka_~small_reverse_20_gray.png') no-repeat;
+}
+
 .Aligner {
   display: flex;
   align-items: center;
@@ -17,9 +21,15 @@ Feel free to use it if you like. */
   padding:5px;
   z-index:1;
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.7);
-  margin-top:5px;
+  background-color: rgba(192, 192, 192, 0.7);
+  margin-top:55px;
   margin-left:5px;
+  border-radius: 2px;
+}
+
+.board{
+  box-shadow: 0px 0px 5px #888888;
+  margin-top: 50px;
 }
 
 .text{
